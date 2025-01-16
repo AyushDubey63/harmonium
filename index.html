@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harmonium</title>
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+            to bottom right,
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0)
+          ),
+          url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/187/vwood.png);
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .button-container {
+        height: 24rem;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .button-container button {
+        height: 100%;
+        width: 4rem;
+        background-color: white;
+        border-radius: 0px 0px 10px 10px;
+        border: 1px solid black;
+        flex-shrink: 0;
+      }
+
+      .white {
+        z-index: 1;
+        border-left: 1px solid #bbb;
+        border-bottom-right-radius: 0.75rem;
+        border-bottom-left-radius: 0.75rem;
+        box-shadow: -1px 0 0 rgba(255, 255, 255, 0.8) inset, 0 0 5px #ccc inset,
+          0 0 3px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(to bottom, #eee 0%, #fff 100%);
+      }
+
+      .white:active {
+        border-top: 1px solid #777;
+        border-left: 1px solid #999;
+        border-bottom: 1px solid #999;
+        box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1) inset,
+          -5px 5px 20px rgba(0, 0, 0, 0.2) inset, 0 0 3px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(to bottom, #fff 0%, #e9e9e9 100%);
+      }
+
+      .black {
+        margin: 0 0 0 -1em;
+        z-index: 2;
+        border: 1px solid #000;
+
+        background: linear-gradient(45deg, #222 0%, #555 100%);
+      }
+
+      .black:active {
+        box-shadow: -1px -1px 2px rgba(100, 100, 100, 0.2) inset,
+          0 -1px 1px 1px rgba(0, 0, 0, 0.9) inset, 0 1px 2px rgba(0, 0, 0, 0.9);
+        background: linear-gradient(to right, #212121 0%, #222 100%);
+      }
+
+      .active {
+        filter: brightness(0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="wooden-panel">
+        <div class="groove-pattern"></div>
+      </div>
+
+      <div class="button-container">
+        <div style="position: relative; height: 100%">
+          <button id="shift" class="white"></button>
+          <button id="a" class="white"></button>
+          <button id="s" class="white"></button>
+          <button
+            id="w"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 7.5rem;
+            "
+          ></button>
+
+          <button id="d" class="white"></button>
+          <button
+            id="e"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 11.5rem;
+            "
+          ></button>
+          <button id="f" class="white"></button>
+          <button
+            id="t"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 19.5rem;
+            "
+          ></button>
+          <button id="g" class="white"></button>
+          <button
+            id="y"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 23.5rem;
+            "
+          ></button>
+          <button id="h" class="white"></button>
+          <button
+            id="u"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 27.5rem;
+            "
+          ></button>
+          <button id="j" class="white"></button>
+          <button id="k" class="white"></button>
+          <button
+            id="o"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 35.5rem;
+            "
+          ></button>
+          <button id="l" class="white"></button>
+          <button
+            id="p"
+            class="black"
+            style="
+              height: 15rem;
+              border: 1px solid #000;
+              background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.1, rgb(14, 15, 14)),
+                /* Extend dark at the top */ color-stop(0.8, rgb(0, 0, 0)),
+                /* Place black in the middle */
+                  color-stop(0.95, rgb(150, 150, 150))
+                  /* Shine extends farther down */
+              );
+              box-shadow: -0.1px -0.1px 4px rgba(255, 255, 255, 0.4) inset,
+                0 -10px 4px 5px rgba(100, 100, 100, 0.8) inset,
+                0 2px 4px rgba(0, 0, 0, 0.6);
+              width: 2.5rem;
+              border-radius: 0 0 30px 30px;
+              position: absolute;
+              top: 0;
+              left: 39.5rem;
+            "
+          ></button>
+          <button id="l" class="white"></button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const audioRefs = {
+        shift: new Audio("./sounds/b2.wav"),
+        a: new Audio("./sounds/c3.wav"),
+        w: new Audio("./sounds/cSharp3.wav"),
+        s: new Audio("./sounds/d3.wav"),
+        e: new Audio("./sounds/dSharp3.wav"),
+        d: new Audio("./sounds/e3.wav"),
+        f: new Audio("./sounds/f3.wav"),
+        t: new Audio("./sounds/fSharp3.wav"),
+        g: new Audio("./sounds/g3.wav"),
+        y: new Audio("./sounds/gSharp3.wav"),
+        h: new Audio("./sounds/a3.wav"),
+        u: new Audio("./sounds/aSharp3.wav"),
+        j: new Audio("./sounds/b3.wav"),
+        k: new Audio("./sounds/c4.wav"),
+        o: new Audio("./sounds/cSharp4.wav"),
+        l: new Audio("./sounds/d4.wav"),
+        p: new Audio("./sounds/dSharp4.wav"),
+      };
+
+      const activeKeys = {};
+
+      const playNote = (key) => {
+        console.log(key);
+        const audio = audioRefs[key];
+        if (audio && audio.paused) {
+          audio.currentTime = 0;
+          audio.loop = true;
+          audio.play().catch(console.error);
+          activeKeys[key] = true;
+          document.getElementById(key).classList.add("active");
+        }
+      };
+
+      const stopNote = (key) => {
+        const audio = audioRefs[key];
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.loop = false;
+          activeKeys[key] = false;
+          document.getElementById(key).classList.remove("active");
+        }
+      };
+
+      window.addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        if (key in audioRefs && !activeKeys[key]) playNote(key);
+      });
+
+      window.addEventListener("keyup", (e) => {
+        const key = e.key.toLowerCase();
+        if (key in audioRefs) stopNote(key);
+      });
+
+      document.querySelectorAll("button").forEach((btn) => {
+        const key = btn.id;
+        btn.addEventListener("mousedown", () => playNote(key));
+        btn.addEventListener("mouseup", () => stopNote(key));
+        btn.addEventListener("mouseleave", () => stopNote(key));
+      });
+    </script>
+  </body>
+</html>
